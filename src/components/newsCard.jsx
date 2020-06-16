@@ -1,23 +1,34 @@
 import React from "react";
 
-class NewsCard extends React.Component {
-    constructor() {
-        super();
-
-    }
-    
-    componentDidMount(){
-        fetch("https://newsapi.org/v2/everything?q=bitcoin&apiKey=3c661e5df6d243708cfe9324fcf60eef")
-        .then(res => res.json())
-        .then(data => {console.log(data)})
-        .catch(error => console.log({error}));
-    }
-
-    render() {
-        return (
-            <>
-
-            </>
-        )
-    }
+function NewsCard({ news }) {
+  return (
+    <>
+      <li className="news_card">
+        <div className="news_card_wrapper">
+          {console.log(news)}
+          <div className="news_card_image">
+            
+              <img src={news.urlToImage ? news.urlToImage : "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"} alt="News Image" />
+            
+          </div>
+          <div className="news_card_txt">
+            <div className="news_card_flex">
+              <p className="news_card_source">{news.source.name}</p>
+              <p className="news_card_date">
+                {news.publishedAt
+                  .toString()
+                  .slice(0, 10)
+                  .split("-")
+                  .reverse()
+                  .join(" / ")}
+              </p>
+            </div>
+            <p className="news_card_title">{news.title}</p>
+          </div>
+        </div>
+      </li>
+    </>
+  );
 }
+
+export default NewsCard;

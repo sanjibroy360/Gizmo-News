@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./header.jsx";
 import Sources from "./sources.jsx";
-import Hero from "./hero.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -32,7 +31,6 @@ class App extends React.Component {
       <>
         <React.Fragment>
           <Header />
-          <Hero />
           <Sources />
           
         </React.Fragment>

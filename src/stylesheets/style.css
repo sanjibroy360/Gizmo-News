@@ -53,7 +53,7 @@ table {
 /* Common */
 
 body {
-	background-color: #fff;
+	background-color: linear-gradient(to bottom , rgb(234,237,237), rgb(240,242,242));
 	line-height: 1.5;
 	font-size: 16px;
 }
@@ -70,6 +70,13 @@ body {
 button, a {
     cursor: pointer;
 }
+
+img {
+	width: 100%;
+	height: 100%;
+	
+}
+
 
 
 /* Header */
@@ -125,7 +132,7 @@ button, a {
 /* Button List */
 
 .source_flex {
-	background-color: azure;
+	background-color: rgb(242,242,242);
 	padding: 15px;
 	margin-top: 20px;
 	display: flex;
@@ -135,19 +142,27 @@ button, a {
 }
 
 .source_btn {
-	padding: 5px;
+	padding: 9px 8px;
 	text-transform: capitalize;
+	font-size: 14px;
 	min-width: 120px;
 	background-color: #fff;
-	border: 1.5px solid #555;
+	border: 1.5px solid #eee;
+	border-radius: 7px;
 }
 
 
 /* Headlines */ 
 
 .headline_wrapper{
-	width: 22%;
+	width: 95%;
 	padding: 10px;
+}
+
+.all_headline {
+	height: 80vh;
+	overflow-y: scroll;
+	padding: 5px;
 }
 
 .each_headline {
@@ -190,3 +205,89 @@ button, a {
 	border: none;
 }
 
+/* News Card */
+
+.news_cards {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	
+}
+
+.news_card {
+	width: 30%;
+	margin: 24px 10px;
+	padding: 10px;
+}
+
+.news_card_flex {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.news_card_image img{
+	height: 150px;
+	padding: 0px;
+	object-fit: cover;
+}
+
+/* Feature */
+
+.feature_wrapper {
+	display: flex;
+	justify-content: space-between;
+	width: 75%;
+	border: 1px solid #ddd;
+	padding: 25px;
+}
+
+.feature_image {
+	height: 60vh;
+}
+
+.feature_image img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.feature_title {
+	font-size: 20px;
+	font-weight: bold;
+	color: rgb(41, 40, 40);
+}
+
+.feature_desc {
+	font-size: 17px;
+}
+
+.feature_author {
+	font-size: 14px;
+	color: #555;
+	margin: 15px 0px;
+}
+
+.feature_txt {
+	margin-left: 25px;
+}
+
+/* Content */
+
+.content_flex {
+	margin-top: 25px;
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.all_news_cards {
+	flex-basis: 72%;
+}
+
+.headline_list {
+	flex-basis: 25%;
+	margin-left: 35px;
+}

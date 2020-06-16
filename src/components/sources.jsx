@@ -14,22 +14,19 @@ class Sources extends React.Component {
 
   handleClick = (btn = "all") => {
     var date = new Date();
-    var month =
-      date.getDate() +
-      "/" +
-      (+date.getMonth() + 1 <= 9
+    var month = (+date.getMonth() + 1 <= 9
         ? "0" + (+date.getMonth() + 1)
         : +date.getMonth() + 1);
-        
+
     if (btn === "all") {
       fetch(
-        `https://newsapi.org/v2/everything?q=${month}&apiKey=3c661e5df6d243708cfe9324fcf60eef`
+        `https://newsapi.org/v2/everything?q=${month}&language=en&apiKey=3c661e5df6d243708cfe9324fcf60eef`
       )
         .then((res) => res.json())
         .then((data) => this.setState({ view: data.articles }));
     } else {
       fetch(
-        `https://newsapi.org/v2/everything?sources=${btn}&apiKey=3c661e5df6d243708cfe9324fcf60eef`
+        `https://newsapi.org/v2/everything?sources=${btn}&language=en&apiKey=3c661e5df6d243708cfe9324fcf60eef`
       )
         .then((res) => res.json())
         .then((data) => this.setState({ view: data.articles }));
@@ -46,26 +43,33 @@ class Sources extends React.Component {
   }
 
   render() {
-    return this.state.sources ? (
+    return (
       <>
-        <ul className="source_flex">
-          <li>
-            <button
-              className="source_btn"
-              onClick={() => this.handleClick("all")}
-            >
-              All
-            </button>
-          </li>
-          <SourceList
-            allSources={this.state.sources}
-            handleClick={this.handleClick}
-          />
-        </ul>
-        <Contents filteredData={this.state.view} />
+        {this.state.sources ? (
+          <section>
+            <ul className="source_flex">
+              <li>
+                <button
+                  className="source_btn"
+                  onClick={() => this.handleClick("all")}
+                >
+                  All
+                </button>
+              </li>
+              <SourceList
+                allSources={this.state.sources}
+                handleClick={this.handleClick}
+              />
+            </ul>
+          </section>
+        ) : (
+          ""
+        )}
+        
+        <section>
+          <Contents filteredData={this.state.view || this.handleClick("all")} />
+        </section>
       </>
-    ) : (
-      ""
     );
   }
 }

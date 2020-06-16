@@ -3,7 +3,8 @@ import React from "react";
 function randomNumber(arr) {
   var arrRandomNum = []
   for(let i = 1; i <= 5; i++) {
-    arrRandomNum.push(Math.floor(Math.random() * (arr.length - 6)));
+    // arrRandomNum.push(Math.floor(Math.random() * (arr.length - 6)));
+    arrRandomNum.push(10+i)
   }
   return arrRandomNum;
   

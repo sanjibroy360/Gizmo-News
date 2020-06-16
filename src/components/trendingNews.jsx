@@ -1,5 +1,4 @@
 import React from "react";
-import Hero from "./hero";
 
 class TrendingNews extends React.Component {
   constructor(props) {
@@ -31,7 +30,7 @@ class TrendingNews extends React.Component {
       <aside>
         <div className="headline_wrapper">
           <h2 className="headline_heading">Headlines</h2>
-          <ul>
+          <ul className="all_headline">
             {this.state.headlines ? (
               this.randomNumber(this.state.headlines)
                 .map((num) => {
