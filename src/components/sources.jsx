@@ -12,6 +12,16 @@ class Sources extends React.Component {
     };
   }
 
+  randomData(arr) {
+    var arrRandomNum = []
+    for(let i = 1; i <= 5; i++) {
+      var randomIndex = (Math.floor(Math.random() * (arr.length - 6)));
+      arrRandomNum.push(arr[randomIndex]);
+    }
+    return arrRandomNum;
+  }
+  
+
   handleClick = (btn = "all") => {
     var date = new Date();
     var month = (+date.getMonth() + 1 <= 9
@@ -38,7 +48,7 @@ class Sources extends React.Component {
       "https://newsapi.org/v2/sources?language=en&country=us&apiKey=3c661e5df6d243708cfe9324fcf60eef"
     )
       .then((res) => res.json())
-      .then((data) => this.setState({ sources: data.sources }))
+      .then((data) => this.setState({ sources: this.randomData(data.sources) }))
       .catch((error) => console.log({ error }));
   }
 

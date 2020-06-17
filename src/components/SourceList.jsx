@@ -1,24 +1,15 @@
 import React from "react";
 
-function randomNumber(arr) {
-  var arrRandomNum = []
-  for(let i = 1; i <= 5; i++) {
-    // arrRandomNum.push(Math.floor(Math.random() * (arr.length - 6)));
-    arrRandomNum.push(10+i)
-  }
-  return arrRandomNum;
-  
-}
 
 function SourceList(props) {
-  var nums = randomNumber(props.allSources);
+  
   return (
     <>
-      {nums
-        .map((num) => {
+      {props.allSources
+        .map((news) => {
           return (
             <li>
-              <button className="source_btn" onClick={() => props.handleClick(props.allSources[num].id)}>{props.allSources[num].name}</button>
+              <button className="source_btn" onClick={() => props.handleClick(news.id)}>{news.name}</button>
             </li>
           );
         })}
