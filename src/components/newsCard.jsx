@@ -5,7 +5,7 @@ function NewsCard({ news }) {
     <>
       <li className="news_card">
         <div className="news_card_wrapper">
-          {console.log(news)}
+          
           <div className="news_card_image">
             
               <img src={news.urlToImage ? news.urlToImage : "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"} alt="News Image" />

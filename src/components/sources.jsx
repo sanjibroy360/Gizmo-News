@@ -8,7 +8,8 @@ class Sources extends React.Component {
     this.state = {
       sources: null,
       buttonClicked: "all",
-      view: null,
+      view: props.searchedData || null,
+      
     };
   }
 

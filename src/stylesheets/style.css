@@ -83,7 +83,8 @@ img {
 .header_flex {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .header_flex li {
@@ -109,8 +110,8 @@ img {
 
 .search_icon {
 	position: absolute;
-	right: 25px;
-	top: 5px;
+	right: 85px;
+	top: 6px;
 	padding: 5px 7px;
 	background-color: transparent;
 	border: none;

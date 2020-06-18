@@ -13,7 +13,7 @@ class App extends React.Component {
       <>
         <React.Fragment>
           <Header />
-          <Sources />
+          
           
         </React.Fragment>
       </>
