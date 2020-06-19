@@ -24,20 +24,23 @@ class Sources extends React.Component {
   
 
   handleClick = (btn = "all") => {
+    this.setState({view: null})
     var date = new Date();
     var month = (+date.getMonth() + 1 <= 9
         ? "0" + (+date.getMonth() + 1)
         : +date.getMonth() + 1);
 
     if (btn === "all") {
+      // alert("All Called!")
       fetch(
-        `https://newsapi.org/v2/everything?q=${month}&language=en&apiKey=3c661e5df6d243708cfe9324fcf60eef`
+        `https://newsapi.org/v2/everything?q=${month}&sortBy=publishedAt&language=en&apiKey=3c661e5df6d243708cfe9324fcf60eef`
       )
         .then((res) => res.json())
         .then((data) => this.setState({ view: data.articles }));
     } else {
+      // alert("Sources!")
       fetch(
-        `https://newsapi.org/v2/everything?sources=${btn}&language=en&apiKey=3c661e5df6d243708cfe9324fcf60eef`
+        `https://newsapi.org/v2/everything?sources=${btn}&sortBy=publishedAt&language=en&apiKey=3c661e5df6d243708cfe9324fcf60eef`
       )
         .then((res) => res.json())
         .then((data) => this.setState({ view: data.articles }));
@@ -45,8 +48,10 @@ class Sources extends React.Component {
   };
 
   componentDidMount() {
+    // alert("sources-did-mount");
+    console.log({view: this.state.view})
     fetch(
-      "https://newsapi.org/v2/sources?language=en&country=us&apiKey=3c661e5df6d243708cfe9324fcf60eef"
+      "https://newsapi.org/v2/sources?language=en&sortBy=publishedAt&country=us&apiKey=3c661e5df6d243708cfe9324fcf60eef"
     )
       .then((res) => res.json())
       .then((data) => this.setState({ sources: this.randomData(data.sources) }))
@@ -56,6 +61,7 @@ class Sources extends React.Component {
   render() {
     return (
       <>
+        {this.state.view ? console.log({value: this.state.view}): ""}
         {this.state.sources ? (
           <section>
             <ul className="source_flex">
@@ -77,9 +83,13 @@ class Sources extends React.Component {
           ""
         )}
         
-        <section>
-          <Contents filteredData={this.state.view || this.handleClick("all")} />
+        {this.state.view ?
+         <section>
+          <Contents filteredData={this.state.view}/>
         </section>
+        :("Loading...")
+        }
+       
       </>
     );
   }

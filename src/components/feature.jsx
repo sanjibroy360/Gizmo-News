@@ -1,19 +1,22 @@
 import React from "react";
 
-function FeaturedNews({ news }) {
+function FeaturedNews(props) {
+  console.log("Feature: ", props);
   return (
     <>
-      <div className="feature_wrapper">
+      {props.news ?(
+        <div className="feature_wrapper">
         <div className="feature_image">
-          <img src={news.urlToImage} alt="News Image" />
+          <img src={props.news.urlToImage} alt="News Image" />
         </div>
 
         <div className="feature_txt">
-          <h2 className="feature_title">{news.title}</h2>
-          <p className="feature_author">Author: {news.author}</p>
-          <p className="feature_desc">{news.description}</p>
+          <h2 className="feature_title">{props.news.title}</h2>
+          <p className="feature_author">Author: {props.news.author}</p>
+          <p className="feature_desc">{props.news.description}</p>
         </div>
       </div>
+      ): "Loading..."}
     </>
   );
 }

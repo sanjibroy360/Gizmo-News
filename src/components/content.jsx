@@ -3,65 +3,75 @@ import NewsCard from "./newsCard.jsx";
 import FeaturedNews from "./feature.jsx";
 import TrendingNews from "./trendingNews.jsx";
 
-function randomNumber(arr = []) {
-  return Math.floor(Math.random() * (arr.length - 1));
-}
-
-function randomData(arr=[], featureIndex) {
-  var obj = {}
-  var arrRandomData = [];
-  var limit = 9;
-  for (let i = 1; i <= limit; i++) {
-    var randomIndex = Math.floor(Math.random() * (arr.length - 1));
-    
-    if (
-      randomIndex === featureIndex ||
-      obj[randomIndex]
-    ) {
-      limit += 1;
-    } else {
-      arrRandomData.push(arr[randomIndex]);
-      obj[randomIndex] = 1;
-    }
-
+class Contents extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      randomData: props.filteredData || null,
+      featureIndex: 0,
+    };
   }
-  return arrRandomData;
-}
 
+  componentDidMount() {
+    var obj = {};
+    var arrRandomData = [];
+    var limit = 10;
+    var arr = this.state.randomData;
+    for (let i = 1; i <= limit; i++) {
+      var randomIndex = Math.floor(Math.random() * (arr.length - 1));
 
-function Contents(props) {
-  if (props.filteredData) {
-    var featureIndex = randomNumber(props.filteredData);
-    console.log(featureIndex)
-    var randomNewses = randomData(props.filteredData, featureIndex);
-    console.log({randomNewses});
-    while (!props.filteredData[featureIndex].urlToImage) {
-      featureIndex = randomNumber(props.filteredData);
+      if (randomIndex === this.state.featureIndex || obj[randomIndex]) {
+        limit += 1;
+      } else {
+        arrRandomData.push(arr[randomIndex]);
+        obj[randomIndex] = 1;
+      }
+    }
+    this.setState({ randomData: arrRandomData });
+
+    if (!this.state.featureIndex && this.state.randomData) {
+      var featureIndex = Math.floor(Math.random() * 9);
+      
+      while (!this.state.randomData[featureIndex].urlToImage) {
+        featureIndex = Math.floor(
+          Math.random() * 9
+        );
+      }
+      this.setState({ featureIndex });
     }
   }
-  return (
-    <>
-      {props.filteredData ? (
-        <div className="container">
-          <div className="all_news_cards">
-            <div className="content_flex">
-              <FeaturedNews news={props.filteredData[featureIndex]} />
-              <div className="headline_list">
-                <TrendingNews />
+
+  render() {
+    return (
+      <>
+        {this.state.randomData && this.state.featureIndex ? (
+          <div className="container">
+            <div className="all_news_cards">
+              <div className="content_flex">
+                <FeaturedNews
+                  news={this.state.randomData[this.state.featureIndex]} index={this.state.featureIndex} data={this.state.randomData}
+                />
+                <div className="headline_list">
+                  <TrendingNews />
+                </div>
               </div>
+              <ul className="news_cards">
+                {this.state.randomData.map((news, index) => {
+                  return index !== this.state.featureIndex ? (
+                    <NewsCard news={news} />
+                  ) : (
+                    ""
+                  );
+                })}
+              </ul>
             </div>
-            <ul className="news_cards">
-              {randomNewses.map((news, index) => {
-                return index !== featureIndex ? <NewsCard news={news} /> : "";
-              })}
-            </ul>
           </div>
-        </div>
-      ) : (
-        "Loading..."
-      )}
-    </>
-  );
+        ) : (
+          "Loading..."
+        )}
+      </>
+    );
+  }
 }
 
 export default Contents;
